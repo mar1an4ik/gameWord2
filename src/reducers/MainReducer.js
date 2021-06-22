@@ -1,19 +1,26 @@
 import { handleActions } from 'redux-actions';
 
-import { getAllWords } from "../actions";
+import { restartGame, setAnswer } from "../actions";
 
 const defaultState = {
-  words: ["da"],
+  answers: ["", "", "", ""]
 };
 
 export const MainReducer = handleActions(
   {
-    [getAllWords]: (state, { payload: { word } }) => {
-    /*  let statecopy = {...state};
-      statecopy.words = [...state.posts];
-      statecopy.posts = post;
+    [setAnswer]: (state, { payload: { questionNumber, answer } }) => {
+      let statecopy = { ...state };
+      statecopy.answers = [...state.answers];
+      statecopy.answers[questionNumber] = answer;
 
-      return statecopy;*/
+      return statecopy;
     },
+    [restartGame]: (state) => {
+      let statecopy = { ...state };
+      statecopy.answers = [...state.answers];
+      statecopy.answers = [];
+
+      return statecopy;
+    }
   }, defaultState
 );

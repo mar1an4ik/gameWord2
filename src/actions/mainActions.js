@@ -1,5 +1,8 @@
 import { createActions } from "redux-actions";
 
-export const { getAllWords } = createActions({
-  GET_ALL_WORDS: (words) => ({ words }),
+export const { setAnswer } = createActions({
+  SET_ANSWER: (questionNumber, answer) => ({ questionNumber, answer }),
+});
+export const { restartGame } = createActions({
+  RESTART_GAME: () => ({}),
 });

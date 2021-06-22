@@ -1,0 +1,43 @@
+
+.words-screen {
+
+  .card {
+    margin-top: 15vh;
+    border-radius: 15px;
+    margin-left: 10vh;
+    margin-right: 10vh;
+    opacity: 0.9;
+  }
+
+  .btn-answer {
+    margin: 2vh;
+  }
+
+  .pagin-icon {
+    width: 7vh;
+    height: 7vh;
+    margin: 2vh;
+    cursor: pointer;
+  }
+
+  .disabled {
+    opacity: 0.4;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .bulb {
+    width: 7vh;
+    margin: 2vh;
+    cursor: pointer;
+  }
+
+  .question-number, .card-title {
+    user-select: none;
+  }
+
+  .active {
+    padding-top: 1vh;
+    border-bottom: 5px black solid;
+  }
+}

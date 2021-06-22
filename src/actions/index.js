@@ -1,5 +1,6 @@
 import {
-  getAllWords,
+  setAnswer,
+  restartGame
 } from "./mainActions";
 
-export { getAllWords };
+export { setAnswer, restartGame };
