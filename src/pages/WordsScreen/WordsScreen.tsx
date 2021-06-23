@@ -144,7 +144,7 @@ const WordsScreen = () => {
         </div>
         <div className="card-body">
           <h5 className="card-title">
-            {answers[0] + answers[1] + answers[3] + answers[2]}
+            {answers[0] + " " + answers[1] + " " + answers[3] + " " + answers[2]}
           </h5>
           <button
             className="btn btn-primary btn-answer"
