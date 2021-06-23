@@ -7,10 +7,12 @@ import "./wordsScreen.scss";
 import "react-toastify/dist/ReactToastify.min.css";
 import { BulbOff, BulbOn, NextIcon, PreviousIcon } from "../../assets/icons/paginationIcons";
 import { restartGame, setAnswer } from "../../actions";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 const WordsScreen = () => {
-  const answers = useSelector((state) => state.mainTree.answers);
-  const dispatch = useDispatch();
+
+  const answers = useAppSelector((state) => state.mainTree.answers);
+  const dispatch = useAppDispatch();
   const [questionNumber, setQuestionNumber] = useState(0);
   const questions = ["1.Who?", "2.What?", "3.When?", "4.Where?"];
   const [inputAnswer, setInputAnswer] = useState("");

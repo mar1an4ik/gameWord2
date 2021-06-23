@@ -8,7 +8,7 @@ const defaultState = {
 
 export const MainReducer = handleActions(
   {
-    [setAnswer]: (state, { payload: { questionNumber, answer } }) => {
+    [setAnswer]: (state, { payload: { questionNumber:any, answer } }) => {
       let statecopy = { ...state };
       statecopy.answers = [...state.answers];
       statecopy.answers[questionNumber] = answer;
