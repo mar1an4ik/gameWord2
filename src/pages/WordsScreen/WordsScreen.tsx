@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 import { toast, ToastContainer } from "react-toastify";
 
 import "./wordsScreen.scss";
 import "react-toastify/dist/ReactToastify.min.css";
 import { BulbOff, BulbOn, NextIcon, PreviousIcon } from "../../assets/icons/paginationIcons";
-import { restartGame, setAnswer } from "../../actions";
+import {restartGame, setAnswer} from "../../actions";
 import { useAppDispatch, useAppSelector } from "../../hooks";
+import {RootState} from '../../store/store';
 
 const WordsScreen = () => {
 
-  const answers = useAppSelector((state) => state.mainTree.answers);
+  const answers = useAppSelector((state: RootState) => state.mainTree.answers);
   const dispatch = useAppDispatch();
   const [questionNumber, setQuestionNumber] = useState(0);
   const questions = ["1.Who?", "2.What?", "3.When?", "4.Where?"];
@@ -19,21 +19,21 @@ const WordsScreen = () => {
   const [isGameFinished, setGameFinished] = useState(false);
   const isCurrentAnswered = !!answers[questionNumber];
   const isAllAnswered = !answers.filter((answer) => answer === "").length;
-  const textInput = React.createRef();
+  const textInput = React.useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     textInput?.current?.focus(); //autofocus input
   });
 
-  const getPreviousQuestion = () => {
+  const getPreviousQuestion = () : void => {
     setQuestionNumber(questionNumber - 1);
   };
 
-  const getNextQuestion = () => {
+  const getNextQuestion = () : void => {
     setQuestionNumber(questionNumber + 1);
   };
 
-  const finishGame = () => {
+  const finishGame = () : void => {
     if (!isAllAnswered) {
       toast.error("Please answer all questions");
       return;
@@ -41,7 +41,7 @@ const WordsScreen = () => {
     setGameFinished(true);
   };
 
-  const answerQuestion = () => {
+  const answerQuestion = () : void => {
     dispatch(setAnswer(questionNumber, inputAnswer));
     setInputAnswer("");
     if (questionNumber !== 3) {
@@ -49,17 +49,17 @@ const WordsScreen = () => {
     }
   };
 
-  const updateAnswer = event => {
+  const updateAnswer = (event: { target: { value: React.SetStateAction<string>; }; }) : void => {
     setInputAnswer(event.target.value);
   };
 
-  const tryAgain = () => {
+  const tryAgain = () : void => {
     dispatch(restartGame());
     setQuestionNumber(0);
     setGameFinished(false);
   };
 
-  const renderIndicators = () => {
+  const renderIndicators = () : Array<object> => {
     let indicators = [];
     for (let i = 0; i < 4; i++) {
       if (answers[i]) {
@@ -83,7 +83,7 @@ const WordsScreen = () => {
     return indicators;
   };
 
-  const renderQuestionsCard = () => {
+  const renderQuestionsCard = ()  => {
     return (
       <div className="card text-center">
         <div className="card-header">
@@ -144,7 +144,7 @@ const WordsScreen = () => {
         </div>
         <div className="card-body">
           <h5 className="card-title">
-            {answers.join(" ")}
+            {answers[0] + answers[1] + answers[3] + answers[2]}
           </h5>
           <button
             className="btn btn-primary btn-answer"

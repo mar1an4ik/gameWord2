@@ -1,24 +1,30 @@
-import { handleActions } from 'redux-actions';
+import {Action, handleActions} from 'redux-actions';
 
 import { restartGame, setAnswer } from "../actions";
+import {setAnswerPayload} from '../actions/mainActions';
 
 const defaultState = {
   answers: ["", "", "", ""]
 };
 
-export const MainReducer = handleActions(
+type State = {
+  answers: Array<string>;
+};
+type CombinedPayloads = setAnswerPayload ;
+
+export const MainReducer = handleActions<State, CombinedPayloads>(
   {
-    [setAnswer]: (state, { payload: { questionNumber:any, answer } }) => {
-      let statecopy = { ...state };
+    [setAnswer.toString()]: (state, {payload: {questionNumber, answer}}: Action<setAnswerPayload>) : State => {
+      let statecopy = { ...state }
       statecopy.answers = [...state.answers];
       statecopy.answers[questionNumber] = answer;
 
       return statecopy;
     },
-    [restartGame]: (state) => {
+    [restartGame.toString()]: (state):State => {
       let statecopy = { ...state };
       statecopy.answers = [...state.answers];
-      statecopy.answers = [];
+      statecopy.answers = ["", "", "", ""]
 
       return statecopy;
     }
